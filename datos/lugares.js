@@ -1,0 +1,30 @@
+/* Coordenadas orientativas WGS84, en grados. Países: punto representativo, no capital. */
+window.GH = window.GH || {};
+GH.places = [
+  {id:'roma',name:'Roma',region:'Italia',lat:41.9028,lon:12.4964,aliases:['rome'],description:'Explorá Roma y su entorno en la península itálica.'},
+  {id:'egipto',name:'Egipto',region:'África',lat:26.8206,lon:30.8025,scale:2.7,aliases:['egypt'],description:'Un punto de partida para recorrer el valle del Nilo y el nordeste de África.'},
+  {id:'atenas',name:'Atenas',region:'Grecia',lat:37.9838,lon:23.7275,aliases:['athens'],description:'Ubicá Atenas y explorá su relación con el mar Egeo.'},
+  {id:'estambul',name:'Estambul',region:'Turquía',lat:41.0082,lon:28.9784,aliases:['constantinopla','bizancio','istanbul'],description:'Una ciudad junto al Bósforo. También podés buscarla como Constantinopla o Bizancio.'},
+  {id:'jerusalen',name:'Jerusalén',region:'Oriente Próximo',lat:31.7683,lon:35.2137,aliases:['jerusalem'],description:'Ubicá la ciudad entre el Mediterráneo y el mar Muerto.'},
+  {id:'el-cairo',name:'El Cairo',region:'Egipto',lat:30.0444,lon:31.2357,aliases:['cairo'],description:'Recorré el entorno de El Cairo, junto al río Nilo.'},
+  {id:'giza',name:'Guiza',region:'Egipto',lat:29.9792,lon:31.1342,aliases:['giza','piramides','piramides de egipto'],description:'Localizá el entorno de las pirámides de Guiza.'},
+  {id:'cartago',name:'Cartago',region:'Túnez',lat:36.8529,lon:10.3233,aliases:['carthage'],description:'Un destino en la costa norte de África para explorar el Mediterráneo.'},
+  {id:'babilonia',name:'Babilonia',region:'Irak',lat:32.5422,lon:44.4212,aliases:['babylon'],description:'Localizá el sitio de Babilonia en la región de Mesopotamia.'},
+  {id:'petra',name:'Petra',region:'Jordania',lat:30.3285,lon:35.4444,aliases:[],description:'Ubicá el sitio de Petra en el sudoeste de Jordania.'},
+  {id:'paris',name:'París',region:'Francia',lat:48.8566,lon:2.3522,aliases:['paris'],description:'Explorá París y su posición en Europa occidental.'},
+  {id:'londres',name:'Londres',region:'Reino Unido',lat:51.5074,lon:-0.1278,aliases:['london'],description:'Ubicá Londres en el sudeste de Gran Bretaña.'},
+  {id:'madrid',name:'Madrid',region:'España',lat:40.4168,lon:-3.7038,aliases:[],description:'Un punto de partida en el centro de la península ibérica.'},
+  {id:'buenos-aires',name:'Buenos Aires',region:'Argentina',lat:-34.6037,lon:-58.3816,aliases:['buenos aires','caba'],description:'Explorá Buenos Aires, a orillas del Río de la Plata.'},
+  {id:'argentina',name:'Argentina',region:'América del Sur',lat:-38.4161,lon:-63.6167,scale:3.1,aliases:[],description:'Recorré Argentina desde una vista regional del sur de América.'},
+  {id:'cusco',name:'Cusco',region:'Perú',lat:-13.5319,lon:-71.9675,aliases:['cuzco'],description:'Localizá Cusco en los Andes peruanos.'},
+  {id:'machu-picchu',name:'Machu Picchu',region:'Perú',lat:-13.1631,lon:-72.545,aliases:['machupicchu'],description:'Ubicá el sitio de Machu Picchu en los Andes.'},
+  {id:'mexico',name:'Ciudad de México',region:'México',lat:19.4326,lon:-99.1332,aliases:['ciudad de mexico','cdmx','tenochtitlan'],description:'Explorá el valle de México. El alias Tenochtitlan conduce a esta ubicación aproximada.'},
+  {id:'chichen-itza',name:'Chichén Itzá',region:'México',lat:20.6843,lon:-88.5678,aliases:['chichen itza'],description:'Localizá Chichén Itzá en la península de Yucatán.'},
+  {id:'nueva-york',name:'Nueva York',region:'Estados Unidos',lat:40.7128,lon:-74.006,aliases:['new york','nyc'],description:'Recorré la costa atlántica de América del Norte desde Nueva York.'},
+  {id:'pekin',name:'Pekín',region:'China',lat:39.9042,lon:116.4074,aliases:['beijing'],description:'Ubicá Pekín en el norte de China.'},
+  {id:'tokio',name:'Tokio',region:'Japón',lat:35.6762,lon:139.6503,aliases:['tokyo'],description:'Explorá Tokio y el archipiélago japonés.'},
+  {id:'delhi',name:'Nueva Delhi',region:'India',lat:28.6139,lon:77.209,aliases:['delhi','new delhi'],description:'Ubicá Nueva Delhi en el norte de India.'},
+  {id:'sydney',name:'Sídney',region:'Australia',lat:-33.8688,lon:151.2093,aliases:['sydney','sidney'],description:'Explorá la costa sudeste de Australia.'},
+  {id:'tombuctu',name:'Tombuctú',region:'Malí',lat:16.7666,lon:-3.0026,aliases:['timbuktu'],description:'Ubicá Tombuctú en el borde meridional del Sahara.'},
+  {id:'ciudad-del-cabo',name:'Ciudad del Cabo',region:'Sudáfrica',lat:-33.9249,lon:18.4241,aliases:['cape town'],description:'Explorá el extremo sudoeste del continente africano.'}
+];

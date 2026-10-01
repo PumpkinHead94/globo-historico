@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Globo Histórico · Explorador local</title>
+  <link rel="icon" href="globo.ico">
+  <link rel="stylesheet" href="css/estilos.css">
+  <script defer src="vendor/three.min.js"></script>
+  <script defer src="vendor/d3.min.js"></script>
+  <script defer src="datos/mapa.js"></script>
+  <script defer src="datos/lugares.js"></script>
+  <script defer src="datos/accidentes.js"></script>
+  <script defer src="datos/regiones.js"></script>
+  <script defer src="js/regiones.js"></script>
+  <script defer src="datos/hidrografia.js"></script>
+  <script defer src="js/hidrografia.js"></script>
+  <script defer src="datos/ampliacion.js"></script>
+  <script defer src="datos/circulacion.js"></script>
+  <script defer src="js/flujos.js"></script>
+  <script defer src="datos/historia.js"></script>
+  <script defer src="js/historia.js"></script>
+  <script defer src="js/selecciones.js"></script>
+  <script defer src="datos/relieve.js"></script>
+  <script defer src="datos/rivers.js"></script>
+  <script defer src="datos/lakes.js"></script>
+  <script defer src="js/relieve.js"></script>
+  <script defer src="js/comandos.js"></script>
+  <script defer src="js/voz.js"></script>
+  <script defer src="js/globo.js"></script>
+  <script defer src="js/app.js"></script>
+</head>
+<body class="sidebar-closed">
+  <header class="header">
+    <a class="brand" href="index.html" aria-label="Globo Histórico, inicio"><span class="brand-icon">◎</span><span>GLOBO <b>HISTÓRICO</b><small>UN ATLAS PARA EXPLORAR</small></span></a>
+    <button id="sidebar-toggle" class="panel-toggle" aria-controls="sidebar" aria-expanded="false">☰ Explorar</button>
+    <button id="history-toggle" type="button" class="panel-toggle">Historia</button>
+    <button id="voice-toggle" type="button" class="voice-button" aria-pressed="false" aria-label="Activar comando de voz">◉ <span>Activar voz</span></button>
+  </header>
+  <main class="layout">
+    <aside class="sidebar" id="sidebar" hidden>
+      <div class="eyebrow">EXPLORADOR / VERSIÓN 0.5</div>
+      <h1>El mundo, <br>a tu alcance.</h1>
+      <p class="intro">Elegí un destino. Conectá lugares. <br>Empezá a descubrir su historia.</p>
+      <section class="selection" aria-labelledby="selection-heading">
+        <div class="eyebrow" id="selection-heading">TU DESTINO</div>
+        <h2 id="place-name">Planeta Tierra</h2>
+        <p id="place-description">Una mirada al mundo entero. Arrastrá el globo para recorrerlo o escribí un lugar.</p>
+        <div id="place-coordinates">VISTA GLOBAL</div>
+      </section>
+      <details id="history-panel" class="history-panel"><summary>Sociedades, asentamientos y comercio</summary>
+        <p class="history-caption">35 fichas iniciales. Períodos de estudio, no una reconstrucción completa de cada sociedad.</p>
+        <label for="history-era">Período</label><select id="history-era"><option value="">Todos los períodos</option><option value="antigua">Antigüedad</option><option value="medieval">Mundo medieval</option><option value="moderna">Expansión ultramarina y Edad Moderna</option></select>
+        <label for="history-topic">Sociedad o red</label><select id="history-topic"></select>
+        <p id="history-dates" class="eyebrow"></p><p id="history-about"></p>
+        <details id="history-economy"><summary>Recursos económicos</summary><p>Ejemplos cualitativos; cambian según la región y la etapa. No son un inventario completo ni estimaciones de producción.</p><dl><dt>Producción y recursos</dt><dd id="history-production"></dd><dt>Intercambios e importaciones</dt><dd id="history-exchange"></dd><dt>Trabajo y organización</dt><dd id="history-work"></dd></dl></details>
+        <details open><summary>Asentamientos y nodos</summary><label class="history-row"><input id="history-all" type="checkbox"> Seleccionar todos los de esta ficha</label><div id="history-nodes"></div><button id="history-focus" type="button">Seleccionar y ver en el globo</button></details>
+        <details><summary>Red comercial</summary><div id="history-routes"></div><p id="history-no-route">Esta ficha todavía no tiene una red trazada; podés explorar sus nodos.</p><p>Líneas discontinuas: vínculos esquemáticos entre nodos, no caminos ni itinerarios de navegación. No todos estuvieron activos durante todo el período.</p></details>
+        <details><summary>Fuentes de la ficha</summary><p>Los textos de la ficha están disponibles sin conexión. Los enlaces externos requieren Internet.</p><div id="history-sources"></div></details>
+        <p>Selecciones históricas: <b id="history-total">0</b>. Cambiar de ficha conserva las selecciones: podés estar comparando épocas distintas.</p><button id="history-clear" type="button">Limpiar historia</button>
+      </details>
+      <section class="catalog" aria-labelledby="catalog-heading">
+        <div class="catalog-head"><h2 id="catalog-heading">Lugares para explorar</h2><span id="place-count"></span></div>
+        <label class="sr-only" for="filter">Filtrar catálogo</label>
+        <input id="filter" type="search" placeholder="Buscar en el catálogo…" autocomplete="off">
+        <label for="catalog-kind">Tipo de lugar o capa</label><select id="catalog-kind"><option value="">Todos</option><option value="country">Países / territorios</option><option value="region">Regiones</option><option value="ocean">Océanos</option><option value="sea">Mares / golfos / bahías</option><option value="river">Ríos</option><option value="lake">Lagos / embalses</option><option value="strait">Estrechos / canales</option><option value="wind">Vientos</option><option value="warm">Corrientes cálidas</option><option value="cold">Corrientes frías</option><option value="historical">Asentamientos históricos</option><option value="trade">Redes comerciales históricas</option><option value="place">Otros lugares</option></select><p>Agua y asentamientos: probá Nilo, Tigris, Éufrates e Indo, y lagos como Titicaca o Van. Los cauces y orillas son modernos; no reconstruyen la Antigüedad. Marcá casillas para acumular selecciones. Pulsá el nombre para viajar.</p><div id="places" class="places"></div>
+      </section>
+      <details id="selections-panel" class="selections-panel"><summary>Selecciones <span id="selection-count">0</span></summary>
+        <p>Los colores se acumulan al visitar destinos. Países y mares: superficie; ríos: curso; vientos y corrientes: flechas; otros destinos: marca puntual.</p>
+        <div class="selection-actions"><button id="show-selections">Ver selección</button><button id="clear-selections">Limpiar colores</button></div>
+        <div id="selected-list"></div>
+        <p>Las selecciones más recientes quedan encima si se superponen. Mundo conserva los colores. Se borran al cerrar o recargar.</p>
+      </details>
+      <details class="help"><summary>Cómo usar este atlas</summary>
+        <p>Arrastrá para girar. Usá la rueda o dos dedos para acercar. Con el globo enfocado: flechas para girar, + y − para zoom, Inicio para volver al mundo.</p>
+        <p>«Mostrar vientos», «mostrar corrientes frías», «ocultar corrientes cálidas», «seleccionar río Nilo y mar Negro», «activar corriente de Humboldt». Las mismas selecciones se controlan con las casillas de Explorar.</p><p>Comandos: «ir a Roma», «mostrame Egipto», «acercar», «alejar» y «volver al mundo». También podés escribir el nombre solo.</p>
+        <p>«Seleccionar Argentina, Chile y Perú», «agregar Brasil», «quitar Chile», «limpiar colores». Por voz: «Globo, seleccionar Argentina y Chile». Los nombres desconocidos no modifican la selección.</p>
+        <p>Voz local: abrí INICIAR-CON-VOZ.cmd en Windows, pulsá «Activar voz» y permití el micrófono. El audio se procesa en tu navegador y no se envía a Internet.</p>
+        <p>Alturas y profundidades: modelo SRTM15+ procesado por GMT a 10 minutos de arco. Es una vista regional simplificada, no una medición puntual ni un mapa de caminos. El explorador histórico incluye nodos y vínculos esquemáticos con fechas; no fronteras reconstruidas.</p>
+        <a href="LEEME.html" target="_blank" rel="noopener">Guía y créditos ↗</a>
+      </details>
+    </aside>
+    <section class="explorer" aria-label="Explorador del globo">
+      <div class="map-heading"><span>TIERRA / RELIEVE Y TERRITORIO</span><span>ATLAS GEOGRÁFICO · LOCAL</span></div>
+      <details id="layers-panel" class="layer-controls"><summary>Capas del mapa</summary><div class="layers-body">
+        <label><input id="layer-relief" type="checkbox" checked> Hipsometría</label>
+        <label><input id="layer-shade" type="checkbox" checked> Sombreado</label>
+        <label><input id="layer-water" type="checkbox" checked> Ríos y lagos</label>
+        <label><input id="layer-labels" type="checkbox" checked> Accidentes</label>
+        <label><input id="flow-animation" type="checkbox" checked> Animar recorridos</label><label><input id="group-wind" type="checkbox"> Vientos predominantes · amarillo</label><label><input id="group-warm" type="checkbox"> Corrientes cálidas · rojo</label><label><input id="group-cold" type="checkbox"> Corrientes frías · azul</label><p>Flechas animadas: sentido general, sin representar velocidad real. Esquemas, no datos en tiempo real. Elegí recorridos individuales en Explorar.</p><label><input id="wake-word" type="checkbox" checked> Activar comandos con «Globo»</label>
+        <p>Con la voz encendida, decí «Globo, ir a Roma». Desmarcá esta opción para dar comandos sin palabra de activación.</p>
+      </div></details>
+      <div id="globe" tabindex="0" role="region" aria-label="Globo 3D. Arrastrá para girar o usá las flechas del teclado."></div>
+      <div id="fatal" class="fatal" hidden></div>
+      <details id="legend" class="legend"><summary>Escala hipsométrica <span>m</span></summary><div id="legend-bands"></div><p>Altura respecto del nivel del mar. El sombreado modifica el brillo. Blanco indica altura, no nieve. Relieve regional generalizado; no muestra cumbres individuales.</p></details>
+      <details id="terrain-card" class="terrain-card" hidden><summary id="terrain-name"></summary><div class="eyebrow" id="terrain-kind"></div><p id="terrain-description"></p><small id="terrain-elevation"></small></details>
+      <div class="map-note">RELIEVE SRTM15+ / GMT <span>RÍOS Y LAGOS · NATURAL EARTH</span></div>
+      <details id="navigation-panel" class="navigation" aria-label="Controles de navegación"><summary>Vista</summary><div>
+        <button id="zoom-out" aria-label="Alejar" title="Alejar">−</button>
+        <button id="world" class="world" title="Volver al mundo">◎ <span>Mundo</span></button>
+        <button id="zoom-in" aria-label="Acercar" title="Acercar">+</button>
+      </div></details>
+      <details id="commands-panel" class="command-panel"><summary>Escribir un comando</summary>
+        <form id="command-form">
+          <span class="prompt-symbol" aria-hidden="true">⌕</span>
+          <label class="sr-only" for="command">Comando o nombre del lugar</label>
+          <input id="command" placeholder="Seleccionar Argentina, Chile y Perú" autocomplete="off" maxlength="500">
+          <button type="submit" class="go">Ir <span aria-hidden="true">↗</span></button>
+        </form>
+      </details>
+      <div class="voice-feedback"><span id="status" role="status" aria-live="polite">Activá la voz y decí «Globo, ir a Roma».</span><span id="voice-state" class="voice-note">VOZ LOCAL · INACTIVA</span><div id="voice-transcript" aria-live="polite"></div></div>
+    </section>
+  </main>
+  <noscript>Para usar el globo, activá JavaScript en el navegador. No requiere Internet.</noscript>
+</body>
+</html>
+
