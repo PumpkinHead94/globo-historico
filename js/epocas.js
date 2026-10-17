@@ -28,6 +28,8 @@
     api.refreshSelections();
   }
   function preset(view){
+    if(view==='hydro'){preset('geography');ns.waterStudy.activate();$('map-view').value='hydro';return;}
+    if(api.globe)api.globe.hydroFocus=false;
     if(!['geography','territories','trade','resources'].includes(view))return;
     if(view!=='geography'&&!current){
       $('map-view').value='geography';

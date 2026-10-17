@@ -24,3 +24,5 @@
 .map-tools{position:absolute;z-index:8;top:48px;right:20px;max-height:calc(100% - 208px);width:min(310px,calc(100% - 40px));display:flex;flex-direction:column;gap:10px;overflow:auto;pointer-events:auto;scrollbar-width:thin;}
 .map-tools>.epoch-panel,.map-tools>.gesture-panel,.map-tools>.terrain-card{position:static;inset:auto;flex:none;width:100%;max-height:none;margin:0;overflow:visible;pointer-events:auto;box-sizing:border-box;}
 @media(max-width:700px){.map-tools{top:92px;right:12px;max-height:calc(100% - 247px);width:min(310px,calc(100% - 24px));}.map-tools>.epoch-panel,.map-tools>.gesture-panel,.map-tools>.terrain-card{width:100%;}}
+
+#water-panel button,#city-water-link{background:#213845;color:#edf2ef;border:1px solid #647c87;border-radius:5px;padding:7px 10px;cursor:pointer;margin:5px 0;}

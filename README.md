@@ -1,4 +1,4 @@
-# Globo Histórico 0.7.2 · Épocas históricas y voz fluida
+# Globo Histórico 0.7.3 · Épocas históricas y voz fluida
 
 Los paneles de época, gestos y territorio se acomodan uno debajo del otro. Si falta espacio, desplazá ese grupo para acceder a todos los controles.
 
@@ -260,8 +260,18 @@ Mundo conserva los colores; limpiar colores los borra.
 ### Ajuste de gestos 0.6.1
 Pinza más tolerante y seguimiento compatible con intervalos de hasta 2 segundos entre detecciones. La vista de cámara abre al activar gestos y dibuja los puntos detectados. El botón «Tomar zoom sin pinza» se habilita al detectar una mano: toma la apertura actual como referencia, sin saltar de zoom. Sigue siendo necesario comprobar el funcionamiento con la cámara del usuario.
 
-## Vistas rápidas (0.7.2)
+## Vistas rápidas (0.7.3)
 
 En Época histórica elegí Geografía, Territorios históricos, Comercio o Recursos económicos. Las vistas históricas requieren seleccionar un momento disponible. Las casillas permiten personalizar cada vista. El relieve se suaviza en las vistas históricas y se puede restaurar con su casilla. Desde lejos se muestran hasta 6 nombres; al acercarse, hasta 12 o 24. Seleccioná un nombre para abrir su ficha. El panel de gestos se oculta al apagarlo; los errores de cámara siguen visibles.
 
 Comandos: «Globo, vista geografía», «vista territorios históricos», «vista comercio» y «vista recursos económicos». Las selecciones geográficas manuales se conservan como referencias; se pueden quitar con «limpiar colores».
+
+## Ríos y primeras ciudades (0.7.3)
+
+Abrí «Ríos y primeras ciudades» o elegí «Hidrografía» en Vista rápida. Se destacan cursos y nombres de ríos y lagos, con grupos seleccionables: Mesopotamia, Egipto, India/valle del Indo, China, Europa y América. Son selecciones didácticas de cursos principales, no redes completas. El catálogo conserva los demás cursos.
+
+Comandos: «Globo, vista hidrografía», «mostrar ríos de Mesopotamia», «ocultar ríos de Europa», «mostrar ríos de China» y «entorno fluvial de Menfis». Las casillas permiten combinar regiones. «Limpiar colores» retira las selecciones. Las otras vistas recuperan las etiquetas generales.
+
+Primeras fichas ciudad-río: Menfis–Nilo, Mohenjo-Daro–Indo y Carquemis–Éufrates. Se accede por botones o «entorno fluvial de [nombre]». Son ejemplos independientes de la época seleccionada, identificados con su período; no se presentan como ciudades simultáneas. Los trazados son actuales: no reconstruyen cauces antiguos, riberas ni canales desaparecidos.
+
+Fuentes: [UNESCO: Menfis](https://whc.unesco.org/en/list/86/), [UNESCO: Mohenjo-Daro](https://whc.unesco.org/en/list/138/). Carquemis utiliza la ficha existente de los hititas. Los cursos siguen siendo Natural Earth. Se unifican variantes documentadas del catálogo (Rin/Rhine/Rhin, Yangtsé/Yangtze/Chang Jiang, Tigris/Dicle, Tajo/Tejo, Tíber/Tevere); no se fusionan nombres similares sin correspondencia explícita.

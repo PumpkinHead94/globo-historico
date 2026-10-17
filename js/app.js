@@ -14,7 +14,7 @@
     });
     document.querySelectorAll('.place-check').forEach(c=>c.checked=selections.items.has(c.dataset.id));
     for(const group of ['wind','warm','cold']){const all=ns.flows.filter(p=>p.category===group),count=all.filter(p=>selections.items.has(p.id)).length;const c=$('group-'+group);c.checked=count===all.length;c.indeterminate=count>0&&count<all.length;}
-    ns.history?.sync();
+    ns.history?.sync();ns.waterStudy?.sync();
     $('show-selections').disabled=!items.length;$('clear-selections').disabled=!items.length;
   }
   function selectPlaces(places){
@@ -29,6 +29,7 @@
     if(!open)$('sidebar-toggle').focus({preventScroll:true});
   }
   function territory(place){
+    ns.waterStudy?.cityLink(place);
     $('terrain-card').hidden=false;$('terrain-card').open=true;$('terrain-card').scrollIntoView({block:'nearest'});$('terrain-name').textContent=place.name;
     $('terrain-kind').textContent=place.kind?`${place.kind} · Lectura territorial`:'Destino · Entorno geográfico';
     let description=place.description;
@@ -74,6 +75,7 @@
     ns.gestures?.release();
     const result = ns.commands.parse(text);
     switch(result.type) {
+      case 'water': ns.waterStudy.handle(result);status('Hidrografía actualizada. Los cursos representados son actuales.');break;
       case 'epoch': ns.epochs.handle(result);status(document.getElementById('epoch-date').textContent);break;
       case 'history': ns.history.handle(result);status('Explorador histórico actualizado.');break;
       case 'place': visit(result.place); break;
@@ -139,5 +141,6 @@
   ns.app = {execute,world,setSidebar,receiveVoice,selections,get globe(){return globe;},startVoice,visit,selectPlaces,togglePlaces,refreshSelections};
   ns.history.init(ns.app);
   ns.epochs.init(ns.app);
+  ns.waterStudy.init(ns.app);
   ns.gestures=ns.initGestures(ns.app);
 })(window.GH = window.GH || {});
