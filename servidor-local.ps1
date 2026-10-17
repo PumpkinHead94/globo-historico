@@ -78,7 +78,7 @@ public class GloboLocalServer {
                     string file=Path.GetFullPath(Path.Combine(root,route.TrimStart('/').Replace('/',Path.DirectorySeparatorChar)));
                     if(!file.StartsWith(root+Path.DirectorySeparatorChar,StringComparison.OrdinalIgnoreCase)||!File.Exists(file)){Reply(stream,404,"text/plain",new byte[0]);return;}
                     string ext=Path.GetExtension(file).ToLowerInvariant(),mime;
-                    switch(ext){case ".html":mime="text/html; charset=utf-8";break;case ".js":mime="application/javascript; charset=utf-8";break;case ".css":mime="text/css; charset=utf-8";break;case ".gz":mime="application/gzip";break;case ".ico":mime="image/x-icon";break;case ".txt":case ".md":mime="text/plain; charset=utf-8";break;default:Reply(stream,403,"text/plain",new byte[0]);return;}
+                    switch(ext){case ".html":mime="text/html; charset=utf-8";break;case ".mjs":case ".js":mime="application/javascript; charset=utf-8";break;case ".css":mime="text/css; charset=utf-8";break;case ".wasm":mime="application/wasm";break;case ".task":mime="application/octet-stream";break;case ".gz":mime="application/gzip";break;case ".ico":mime="image/x-icon";break;case ".txt":case ".md":mime="text/plain; charset=utf-8";break;default:Reply(stream,403,"text/plain",new byte[0]);return;}
                     Reply(stream,200,mime,File.ReadAllBytes(file),head);
                 }
             } catch(IOException) {} catch(Exception) {}

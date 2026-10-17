@@ -67,3 +67,9 @@ Seis grupos de pruebas del intérprete aprobados; catálogo con 1.694 identifica
 - Captura de escritorio revisada: se conserva la cabecera al abrir Historia y desplazar el panel.
 - Voz: los nuevos comandos se probaron como transcripciones en el receptor común de Vosk. No se validó por audio cada nombre histórico ni se usó el micrófono físico. El motor local no se modificó.
 - Alcance histórico: fichas introductorias con marcos temporales, ejemplos económicos cualitativos y vínculos esquemáticos; no fronteras ni itinerarios reconstruidos.
+
+
+## 0.6 · Gestos (16/10/2026)
+- Prueba unitaria: pinza sostenida, separar/acercar, puño, pérdida de mano, dos manos, pausas, invariancia ante escala y zona muerta.
+- Edge automatizado con cámara sintética y modelo real local: carga de WASM/modelo y procesamiento de fotogramas; conexiones externas bloqueadas; sin solicitudes de cámara al abrir ni captura de audio; Escape, parada, reinicio, permiso denegado y cancelación mientras el permiso está pendiente.
+- Presentación comprobada en 1440×1000 y 390×844. No se grabó ni abrió la cámara física del usuario. La precisión y comodidad con manos reales quedan pendientes de prueba manual.

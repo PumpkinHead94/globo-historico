@@ -29,6 +29,7 @@
   <script defer src="js/comandos.js"></script>
   <script defer src="js/voz.js"></script>
   <script defer src="js/globo.js"></script>
+  <script defer src="js/gestos.js"></script>
   <script defer src="js/app.js"></script>
 </head>
 <body class="sidebar-closed">
@@ -37,10 +38,11 @@
     <button id="sidebar-toggle" class="panel-toggle" aria-controls="sidebar" aria-expanded="false">☰ Explorar</button>
     <button id="history-toggle" type="button" class="panel-toggle">Historia</button>
     <button id="voice-toggle" type="button" class="voice-button" aria-pressed="false" aria-label="Activar comando de voz">◉ <span>Activar voz</span></button>
+    <button id="gestures-toggle" type="button" class="panel-toggle" aria-pressed="false" aria-controls="gesture-panel">Activar gestos</button>
   </header>
   <main class="layout">
     <aside class="sidebar" id="sidebar" hidden>
-      <div class="eyebrow">EXPLORADOR / VERSIÓN 0.5</div>
+      <div class="eyebrow">EXPLORADOR / VERSIÓN 0.6</div>
       <h1>El mundo, <br>a tu alcance.</h1>
       <p class="intro">Elegí un destino. Conectá lugares. <br>Empezá a descubrir su historia.</p>
       <section class="selection" aria-labelledby="selection-heading">
@@ -92,6 +94,15 @@
         <p>Con la voz encendida, decí «Globo, ir a Roma». Desmarcá esta opción para dar comandos sin palabra de activación.</p>
       </div></details>
       <div id="globe" tabindex="0" role="region" aria-label="Globo 3D. Arrastrá para girar o usá las flechas del teclado."></div>
+      <section id="gesture-panel" class="gesture-panel" aria-label="Control por gestos" hidden>
+        <div class="gesture-heading"><b>Zoom con la mano</b><button id="gesture-stop" type="button" aria-label="Apagar cámara y gestos">Apagar</button></div>
+        <p id="gesture-state" role="status" aria-live="polite">Cámara apagada.</p>
+        <details><summary>Guía y vista de cámara</summary>
+          <p>Mostrá una sola mano. Juntá pulgar e índice un instante para tomar el zoom, con los otros dedos extendidos. Separalos para agrandar y acercalos para achicar. Cerrá toda la mano o sacala de cámara para soltar.</p>
+          <video id="gesture-video" autoplay muted playsinline aria-label="Vista local de la cámara"></video>
+          <p>Buena luz y mano completa frente a la cámara. Procesamiento local: no se graba ni se envía video. Escape o cambiar de pestaña apaga la cámara.</p>
+        </details>
+      </section>
       <div id="fatal" class="fatal" hidden></div>
       <details id="legend" class="legend"><summary>Escala hipsométrica <span>m</span></summary><div id="legend-bands"></div><p>Altura respecto del nivel del mar. El sombreado modifica el brillo. Blanco indica altura, no nieve. Relieve regional generalizado; no muestra cumbres individuales.</p></details>
       <details id="terrain-card" class="terrain-card" hidden><summary id="terrain-name"></summary><div class="eyebrow" id="terrain-kind"></div><p id="terrain-description"></p><small id="terrain-elevation"></small></details>

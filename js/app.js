@@ -71,6 +71,7 @@
     $('place-coordinates').textContent='VISTA GLOBAL'; status('Vista del mundo restaurada.'); renderCatalog();
   }
   function execute(text) {
+    ns.gestures?.release();
     const result = ns.commands.parse(text);
     switch(result.type) {
       case 'history': ns.history.handle(result);status('Explorador histórico actualizado.');break;
@@ -140,4 +141,5 @@
   function togglePlaces(places,value){if(value)selections.add(places);else selections.remove(places);refreshSelections();status('Selección actualizada.');}
   ns.app = {execute,world,setSidebar,receiveVoice,selections,get globe(){return globe;},startVoice,visit,selectPlaces,togglePlaces};
   ns.history.init(ns.app);
+  ns.gestures=ns.initGestures(ns.app);
 })(window.GH = window.GH || {});

@@ -50,3 +50,10 @@ Natural Earth, dominio público: ne_10m_rivers_lake_centerlines.geojson y ne_10m
 
 ## Explorador histórico 0.5 — 26/09/2026
 Síntesis originales y coordenadas representativas aproximadas. Fuentes seleccionadas por ficha en HISTORIA.md, HISTORIA.html y datos/historia.js. No se redistribuyen artículos completos ni imágenes. Las fechas son marcos de estudio, y los enlaces entre nodos son diagramas geográficos editoriales, no digitalizaciones de rutas históricas. Los recursos son ejemplos cualitativos; procedencia, producción e intercambios varían por lugar y período.
+
+
+## Gestos 0.6 — 16/10/2026
+- MediaPipe Tasks Vision 0.10.21, Google: https://registry.npmjs.org/@mediapipe/tasks-vision/-/tasks-vision-0.10.21.tgz . Se redistribuyen vision_bundle.mjs y los runtimes WASM SIMD/no SIMD sin modificaciones. Apache-2.0; texto en mediapipe-APACHE.txt y documentación original en mediapipe-README.md.
+- Modelo Hand Landmarker float16 v1: https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task . Contiene detector de palma y landmarks. Apache-2.0 según la ficha oficial: https://storage.googleapis.com/mediapipe-assets/Model%20Card%20Hand%20Tracking%20%28Lite_Full%29%20with%20Fairness%20Oct%202021.pdf . Modelo original sin modificaciones.
+- Documentación: https://ai.google.dev/edge/mediapipe/solutions/vision/hand_landmarker/web_js . Descargas solo durante preparación del proyecto; el uso normal no consulta esos servidores.
+- Algoritmo de pinza, interfaz y coordinación del trabajador: código propio, MIT. No se incluyen videos personales ni imágenes de cámaras reales.

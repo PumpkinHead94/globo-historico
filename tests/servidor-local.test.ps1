@@ -23,6 +23,7 @@ try {
             Copy-Item -LiteralPath (Join-Path $sourceTestGlobo $nameTestGlobo) -Destination $directoryTestGlobo
         }
         Set-Content -LiteralPath (Join-Path $directoryTestGlobo 'index.html') -Value 'Globo test'
+        foreach($extGlobo in @('mjs','wasm','task')){ Set-Content -LiteralPath (Join-Path $directoryTestGlobo ('prueba.'+$extGlobo)) -Value 'fixture' }
     }
     $testProcessesGlobo+=Start-TestGlobo $testDirsGlobo[0]
     $testProcessesGlobo+=Start-TestGlobo $testDirsGlobo[0]
@@ -32,6 +33,10 @@ try {
     if($firstTestGlobo -eq $secondTestGlobo){throw 'Dos carpetas compartieron una instancia incorrectamente.'}
     foreach($portTestGlobo in @($firstTestGlobo,$secondTestGlobo)){
         $pageTestGlobo=Invoke-WebRequest -UseBasicParsing "http://127.0.0.1:$portTestGlobo/" -TimeoutSec 3
+        foreach($pairGlobo in @(@('mjs','application/javascript'),@('wasm','application/wasm'),@('task','application/octet-stream'))){
+            $assetGlobo=Invoke-WebRequest -UseBasicParsing ("http://127.0.0.1:$portTestGlobo/prueba."+$pairGlobo[0]) -TimeoutSec 3
+            if(-not ($assetGlobo.Headers['Content-Type'] -like ($pairGlobo[1]+'*'))){throw 'Tipo MIME incorrecto para gestos.'}
+        }
         if($pageTestGlobo.Content.Trim() -ne 'Globo test'){throw 'La instancia sirvio otra carpeta.'}
     }
     $repeatTestGlobo=Start-TestGlobo $testDirsGlobo[0]

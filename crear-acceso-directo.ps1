@@ -7,7 +7,7 @@ $shortcutGlobo.TargetPath = Join-Path $env:SystemRoot 'System32/WindowsPowerShel
 $shortcutGlobo.Arguments = '-NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File "' + (Join-Path $rootGlobo 'servidor-local.ps1') + '"'
 $shortcutGlobo.WorkingDirectory = $rootGlobo
 $shortcutGlobo.IconLocation = (Join-Path $rootGlobo 'globo.ico') + ',0'
-$shortcutGlobo.Description = 'Globo Historico: relieve y voz local'
+$shortcutGlobo.Description = 'Globo Historico: relieve, voz y gestos locales'
 $shortcutGlobo.WindowStyle = 7
 $shortcutGlobo.Save()
 Write-Output 'Acceso directo del escritorio actualizado.'

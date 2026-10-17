@@ -151,6 +151,7 @@
       this.marker.visible = true;
     }
     world() { this.target = {lat:18,lon:this.lon + ((-25-this.lon+540)%360+360)%360-180,distance:3.03}; this.marker.visible = false; }
+    zoomGesture(delta) { if(Number.isFinite(delta)) this.target.distance = THREE.MathUtils.clamp(this.target.distance * Math.exp(-delta),1.3,5); }
     zoom(direction) { this.target.distance = THREE.MathUtils.clamp(this.target.distance * (direction > 0 ? .85 : 1/.85),1.3,5); }
     rotate(dx,dy) { this.target.lon += dx; this.target.lat = THREE.MathUtils.clamp(this.target.lat + dy,-85,85); }
     bindInput() {

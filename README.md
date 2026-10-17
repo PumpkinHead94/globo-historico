@@ -1,4 +1,4 @@
-# Globo Histórico 0.5 · Sociedades y recursos económicos
+# Globo Histórico 0.6 · Zoom por gestos
 
 Aplicación educativa portable: globo 3D, geografía e historia con comandos de texto, mouse y reconocimiento de voz en español. Funciona localmente, sin suscripciones ni APIs pagas. Las bibliotecas, los datos y el modelo de voz vienen incluidos.
 
@@ -14,6 +14,22 @@ Para explorar sin voz, abrí **index.html** con doble clic. En otros sistemas, s
 Documentación: [Comandos](COMANDOS.md) · [Historia y economía](HISTORIA.md) · [Verificaciones](VERIFICACION.md) · [Procedencia y licencias](licencias/PROCEDENCIA.md).
 
 El código propio usa la [licencia MIT](LICENCIA.txt); los recursos de terceros conservan sus respectivas licencias.
+
+## Zoom con los dedos (0.6)
+
+Abrí el acceso directo o **INICIAR-CON-VOZ.cmd**, pulsá **Activar gestos** y permití la cámara. Si tenías una versión anterior abierta, ejecutá primero **DETENER-SERVIDOR.cmd** y volvé a abrir: el servidor también se actualizó.
+
+- Mostrá una sola mano completa, con buena luz y la palma hacia la cámara.
+- Juntá pulgar e índice durante un instante, con los otros dedos extendidos, para tomar el zoom.
+- Separalos para agrandar el globo; acercalos para achicarlo.
+- Cerrá la mano o sacala de cámara para soltar. Podés repetir la pinza para continuar.
+- **Detener gestos**, **Apagar**, Escape o salir de la pestaña apaga la cámara. La guía y la vista de cámara son desplegables.
+
+La cámara comienza apagada. El detector no solicita audio, no graba ni envía imágenes. Voz y gestos se activan por separado. Mouse, teclado y comandos siguen disponibles. El procesamiento se realiza en un trabajador del navegador a un máximo aproximado de 12 fotogramas por segundo; no bloquea el dibujo del globo. La separación se normaliza por el tamaño de la palma y el zoom tiene suavizado y límites.
+
+MediaPipe Tasks Vision 0.10.21, sus dos variantes WASM y el modelo Hand Landmarker float16 v1 vienen incluidos: no se descargan al usarlo. Para cámara necesitás localhost o HTTPS; abrir index.html directamente mantiene el mapa, pero muestra cómo iniciar los gestos. Probado en Edge con cámara sintética; queda por evaluar la comodidad con tu cámara, iluminación y gestos reales. La detección puede fallar con oclusiones, poca luz o varias manos.
+
+Pruebas: `node tests/gestos.test.cjs` y `node tests/gestos-browser.test.cjs` (esta última requiere Playwright y Edge). Detalles de dependencias: [licencias](licencias/PROCEDENCIA.md).
 
 ## Novedades de la versión 0.5
 
