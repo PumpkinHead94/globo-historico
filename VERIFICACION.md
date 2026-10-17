@@ -77,3 +77,11 @@ Seis grupos de pruebas del intérprete aprobados; catálogo con 1.694 identifica
 
 ## 0.6.2 · Giro lateral
 Pruebas de puntos de mano simulados: giro en ambos sentidos, toma sin salto, zona muerta, límite de desplazamiento, mano quieta, puño, pérdida de seguimiento, dos manos y exclusión del zoom. Prueba de navegador: resultados simulados enviados por el canal del detector modifican la longitud de la cámara sin cambiar latitud ni zoom; carga del modelo real con video sintético y pruebas de privacidad/ciclo de vida siguen pasando. Pendiente comprobar comodidad del giro con la mano real del usuario.
+
+
+## 0.7 · Épocas y activación de voz (17/10/2026)
+- Datos: tres cortes, siglo correcto sin año cero, referencias, nodos presentes por corte, extremos de redes y coordenadas/anillos válidos.
+- Navegador offline: selección de siglo/año, límites aqueménidas y romanos con comprobaciones de inclusión/exclusión, capas, retirada de selecciones anteriores, siglos pendientes, referencias actuales, ancho móvil y ausencia de errores o peticiones externas.
+- Activación: transcripciones Globo/lobo, palabra aislada, conversación renovable y vencimiento, modo estricto, desconocidos y reinicio. El alias se prueba como texto reconocido, sin afirmar una mejora acústica del modelo.
+- Vosk real con audio español sintético: activación y viaje a Roma, parada/reinicio, Escape, cierre de pistas, permiso denegado y cero conexiones externas.
+- Regresión: comandos y explorador histórico anteriores aprobados. Queda pendiente validar la fluidez con el micrófono y ambiente reales del usuario. Cartografía seleccionada, aproximada y no exhaustiva; no se certifica la precisión de cada frontera.

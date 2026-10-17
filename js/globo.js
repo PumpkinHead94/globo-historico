@@ -38,7 +38,7 @@
     }
     for (const feature of landFeatures) {
       ctx.beginPath(); path(feature); if(!options.relief){ctx.fillStyle = '#93ad95'; ctx.fill();}
-      ctx.strokeStyle = options.relief?'rgba(52,65,46,.45)':'#577c77'; ctx.lineWidth = .9; ctx.stroke();
+      ctx.strokeStyle = options.relief?'rgba(52,65,46,.45)':'#577c77'; ctx.lineWidth = .9; if(options.borders!==false)ctx.stroke();
     }
     if(options.water){
       ctx.beginPath();path(ns.lakes);ctx.fillStyle='#68b6d4';ctx.fill();
@@ -117,7 +117,7 @@
       for(const {place,color} of items){
         if(place.selectionType==='flow')continue;
         const shape=place.geometry||d3.geoCircle().center([place.lon,place.lat]).radius(.7).precision(3)();
-        ctx.setLineDash(place.category==='trade'?[9,7]:[]);
+        ctx.setLineDash(place.category==='trade'||place.epochLayer==='territory'?[9,7]:[]);
         ctx.beginPath();path(shape);ctx.fillStyle=color;ctx.globalAlpha=place.geometry?.type==='FeatureCollection' ? .38 : .53;if(place.selectionType!=='line')ctx.fill();
         ctx.strokeStyle=color;ctx.lineWidth=place.selectionType==='line'?5:place.geometry?2.3:3.5;ctx.globalAlpha=1;ctx.stroke();
       }

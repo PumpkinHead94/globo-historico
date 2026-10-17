@@ -30,6 +30,10 @@
   <script defer src="js/voz.js"></script>
   <script defer src="js/globo.js"></script>
   <script defer src="js/gestos.js"></script>
+  <script defer src="datos/epocas-geometrias.js"></script>
+  <script defer src="datos/epocas.js"></script>
+  <script defer src="js/epocas.js"></script>
+  <script defer src="js/activacion-voz.js"></script>
   <script defer src="js/app.js"></script>
 </head>
 <body class="sidebar-closed">
@@ -42,7 +46,7 @@
   </header>
   <main class="layout">
     <aside class="sidebar" id="sidebar" hidden>
-      <div class="eyebrow">EXPLORADOR / VERSIÓN 0.6.3</div>
+      <div class="eyebrow">EXPLORADOR / VERSIÓN 0.7</div>
       <h1>El mundo, <br>a tu alcance.</h1>
       <p class="intro">Elegí un destino. Conectá lugares. <br>Empezá a descubrir su historia.</p>
       <section class="selection" aria-labelledby="selection-heading">
@@ -90,9 +94,23 @@
         <label><input id="layer-shade" type="checkbox" checked> Sombreado</label>
         <label><input id="layer-water" type="checkbox" checked> Ríos y lagos</label>
         <label><input id="layer-labels" type="checkbox" checked> Accidentes</label>
-        <label><input id="flow-animation" type="checkbox" checked> Animar recorridos</label><label><input id="group-wind" type="checkbox"> Vientos predominantes · amarillo</label><label><input id="group-warm" type="checkbox"> Corrientes cálidas · rojo</label><label><input id="group-cold" type="checkbox"> Corrientes frías · azul</label><p>Flechas animadas: sentido general, sin representar velocidad real. Esquemas, no datos en tiempo real. Elegí recorridos individuales en Explorar.</p><label><input id="wake-word" type="checkbox" checked> Activar comandos con «Globo»</label>
+        <label><input id="flow-animation" type="checkbox" checked> Animar recorridos</label><label><input id="group-wind" type="checkbox"> Vientos predominantes · amarillo</label><label><input id="group-warm" type="checkbox"> Corrientes cálidas · rojo</label><label><input id="group-cold" type="checkbox"> Corrientes frías · azul</label><p>Flechas animadas: sentido general, sin representar velocidad real. Esquemas, no datos en tiempo real. Elegí recorridos individuales en Explorar.</p><label><input id="wake-word" type="checkbox" checked> Activar comandos con «Globo» o «lobo»</label>
+        <label><input id="voice-conversation" type="checkbox" checked> Conversación: encadenar comandos durante 20 segundos</label><p>Se acepta «Globo» y la confusión «lobo» al inicio. Cada comando reconocido renueva 20 segundos para hablar sin repetir la activación. Desmarcá Conversación para pedir activación en cada orden.</p>
         <p>Con la voz encendida, decí «Globo, ir a Roma». Desmarcá esta opción para dar comandos sin palabra de activación.</p>
       </div></details>
+      <details id="epoch-panel" class="epoch-panel"><summary>Época histórica<span id="epoch-summary-date"></span></summary>
+        <label for="epoch-century">Siglo</label><select id="epoch-century"><option value="">Mapa sin época</option></select>
+        <label for="epoch-moment">Momento representado</label><select id="epoch-moment"><option value="">Sin reconstrucción</option></select>
+        <p id="epoch-date" role="status">Época histórica desactivada</p><p id="epoch-note"></p>
+        <label><input id="epoch-territory" type="checkbox" checked> Territorios aproximados</label>
+        <label><input id="epoch-city" type="checkbox" checked> Ciudades seleccionadas</label>
+        <label><input id="epoch-route" type="checkbox"> Redes de circulación · esquemas</label>
+        <label><input id="epoch-resource" type="checkbox"> Recursos económicos · ejemplos regionales</label>
+        <label><input id="epoch-borders" type="checkbox" checked> Fronteras actuales de referencia</label>
+        <details><summary>Territorios y colores</summary><div id="epoch-legend"></div></details>
+        <details><summary>Economía del período</summary><p id="epoch-economy"></p></details>
+        <details><summary>Fuentes y alcance</summary><div id="epoch-sources"></div><p>Primera selección del Mediterráneo y Cercano Oriente. Límites aproximados; no son fronteras modernas ni ocupación uniforme. Costas, ríos y relieve de base actuales. Las zonas sin color no representan ausencia de pueblos. Las redes y recursos describen el período, no flujos medidos en el año indicado.</p><p>Cambiar de momento retira las selecciones históricas anteriores. Las selecciones geográficas manuales se conservan como referencias actuales y pueden superponerse. Las fichas de Historia abarcan períodos más amplios.</p></details>
+      </details>
       <div id="globe" tabindex="0" role="region" aria-label="Globo 3D. Arrastrá para girar o usá las flechas del teclado."></div>
       <section id="gesture-panel" class="gesture-panel" aria-label="Control por gestos" hidden>
         <div class="gesture-heading"><b>Giro y zoom con la mano</b><button id="gesture-stop" type="button" aria-label="Apagar cámara y gestos">Apagar</button></div>

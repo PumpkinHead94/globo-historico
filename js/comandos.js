@@ -32,6 +32,7 @@
   function parse(text, places = ns.places) {
     let query = normalize(String(text).replace(/[,;]+/g,' | '));
     if (!query) return {type:'empty'};
+    const epoch=ns.epochs?.parse(text);if(epoch)return epoch;
     const historical=ns.history?.parse(text);if(historical)return historical;
     if (/^(mundo|inicio|volver|volver al mundo|ver (el )?mundo|mostrar (el )?mundo|mostrame (el )?mundo|planeta|reiniciar|ir al mundo)$/.test(query)) return {type:'world'};
     if (/^(acercar|acerca|acercate|acercame|aumentar zoom|mas zoom|zoom in|\+)$/.test(query)) return {type:'zoom',direction:1};

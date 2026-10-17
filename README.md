@@ -1,6 +1,30 @@
-# Globo Histórico 0.6.3 · Giro y zoom por gestos
+# Globo Histórico 0.7 · Épocas históricas y voz fluida
 
 Aplicación educativa portable: globo 3D, geografía e historia con comandos de texto, mouse y reconocimiento de voz en español. Funciona localmente, sin suscripciones ni APIs pagas. Las bibliotecas, los datos y el modelo de voz vienen incluidos.
+
+## Épocas históricas (0.7)
+
+Abrí **Época histórica** sobre el globo. Elegí siglo y consultá la fecha concreta en **Momento representado**:
+
+| Siglo | Corte disponible | Selección territorial |
+|---|---|---|
+| V a. C. | Hacia 500 a. C. | Persia aqueménida, ámbito cartaginés, poleis griegas y Roma |
+| IV a. C. | Hacia 323 a. C. | Imperio de Alejandro en transición, ámbito cartaginés, poleis y Roma |
+| II d. C. | Hacia 200 d. C. | Imperio romano, Partia y Armenia |
+
+Son tres cortes aproximados, no una animación continua ni un atlas mundial completo. El año 500 a. C. pertenece al siglo V a. C.; 200 d. C. cierra el siglo II. Otros siglos aparecen pendientes y limpian la capa anterior. No se interpola entre fechas.
+
+Casillas: territorios, ciudades, redes de circulación y recursos económicos regionales. Desplegá **Territorios y colores**, **Economía del período** o **Fuentes y alcance**. Las etiquetas permiten consultar fichas de los elementos; algunos nombres se ocultan cuando se superponen. Las redes son conexiones esquemáticas del período, no itinerarios exactos ni volúmenes anuales. Los puntos económicos distinguen zonas productoras de nodos de intercambio.
+
+Las fronteras actuales se ocultan al entrar en una época y pueden activarse como referencia. Cambiar de momento retira las selecciones históricas anteriores. Las selecciones geográficas manuales se conservan como referencias actuales; pueden superponerse. Las fichas del panel Historia siguen siendo estudios de períodos amplios. La comparación de dos épocas todavía no está implementada.
+
+La base física es actual. Los bordes históricos discontinuos expresan aproximación cartográfica; zonas sin color no significan ausencia de pueblos. Las geometrías proceden de Historical Basemaps, proyecto en revisión: no sustituyen un atlas crítico para investigación. Fuente, revisión fijada, licencia GPL-3.0 y transformaciones en `datos/epocas/origen.json` y `licencias/PROCEDENCIA.md`. El código propio conserva MIT; los datos derivados se distribuyen separadamente bajo GPL-3.0.
+
+## Voz más fluida (0.7)
+
+Con **Activar voz** encendido, se acepta «Globo» y la confusión «lobo» al inicio: «Lobo, ir a Roma». Decir solo «Globo» o «lobo» habilita 20 segundos para completar el comando. Con **Conversación** marcada en Capas del mapa, cada orden reconocida renueva esa ventana para encadenar comandos sin repetir la activación. Desmarcala para volver al modo de activación por orden. El micrófono se apaga con Detener voz o Escape; no se ejecutan órdenes a partir de transcripciones parciales.
+
+Ejemplos: «Globo, mostrar siglo quinto antes de Cristo», luego «mostrar rutas históricas», «mostrar recursos históricos», «siguiente período» y «mapa actual». También se admiten cuarto a. C. y segundo d. C., con números, romanos u ordinales. Esta mejora tolera un error del reconocedor y facilita el diálogo; no reemplaza ni reentrena el modelo Vosk, que puede seguir confundiendo otros nombres.
 
 ## Descargar y abrir
 

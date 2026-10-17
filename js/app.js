@@ -4,7 +4,7 @@
   let globe = null, selected = null;
   const selections=new ns.Selections();
   function refreshSelections(){
-    const items=selections.values();if(globe)globe.setSelections(items);
+    const items=selections.values();if(globe)globe.setSelections([...(ns.epochs?.items||[]),...items]);
     $('selection-count').textContent=items.length;$('selected-list').replaceChildren();
     items.forEach(({place,color})=>{
       const row=document.createElement('div');row.className='selected-row';
@@ -57,7 +57,7 @@
   function visit(place) {
     if (!globe) { status('El globo 3D no está disponible. Revisá el aviso en pantalla.',true); return; }
     selected = place.id; globe.flyTo(place);if(place.historyTopic)ns.history.setTopic(place.historyTopic);
-    selections.add([place]);refreshSelections();
+    if(!place.epoch)selections.add([place]);refreshSelections();
     territory(place);
     $('place-name').textContent = place.name;
     $('place-description').textContent = place.description;
@@ -74,6 +74,7 @@
     ns.gestures?.release();
     const result = ns.commands.parse(text);
     switch(result.type) {
+      case 'epoch': ns.epochs.handle(result);status(document.getElementById('epoch-date').textContent);break;
       case 'history': ns.history.handle(result);status('Explorador histórico actualizado.');break;
       case 'place': visit(result.place); break;
       case 'flow-animation': $('flow-animation').checked=result.value;if(globe)globe.flowAnimation=result.value;status(result.value?'Animación activada.':'Animación pausada.');break;
@@ -117,29 +118,26 @@
     const active=state!=='idle';$('voice-toggle').setAttribute('aria-pressed',String(active));$('voice-toggle').setAttribute('aria-label',active?'Detener comando de voz':'Activar comando de voz');
     $('voice-toggle').innerHTML=active?'■ <span>Detener voz</span>':'◉ <span>Activar voz</span>';
     $('voice-state').textContent=state==='loading'?'VOZ LOCAL · CARGANDO':state==='listening'?'VOZ LOCAL · ESCUCHANDO':'VOZ LOCAL · INACTIVA';
-    if(state==='idle')$('voice-transcript').textContent='';if(message)status(state==='listening'&&$('wake-word').checked?'En escucha local. Decí «Globo, ir a Roma».':message);
+    if(state==='idle'){$('voice-transcript').textContent='';voiceGate.reset();}if(message)status(state==='listening'&&$('wake-word').checked?'En escucha local. Decí «Globo, ir a Roma».':message);
   });
-  let wakeUntil=0;
+  const voiceGate=new ns.VoiceGate();
   function receiveVoice(text){
     $('voice-transcript').textContent='Escuchado: '+text;
-    let command=text;
-    if($('wake-word').checked){
-      const normalized=ns.commands.normalize(text);const wake=normalized.match(/^(?:hola |oye |hey )?globo(?:\s+|$)(.*)$/);
-      if(wake){command=wake[1];wakeUntil=Date.now()+12000;if(!command){status('Te escucho. Decí el comando en los próximos 12 segundos.');return;}}
-      else if(Date.now()<wakeUntil){command=text;}
-      else {status('En espera. Decí «Globo» antes del comando.');return;}
-      wakeUntil=0;
-    }
-    $('command').value=command;execute(command);
+    const result=voiceGate.accept(text,$('wake-word').checked,$('voice-conversation').checked);
+    if(result.waiting){status('Te escucho. Decí el comando en los próximos 20 segundos.');return;}
+    if(result.ignored){status('En espera. Decí «Globo»; también acepto «lobo».');return;}
+    $('command').value=result.command;execute(result.command);
   }
-  function startVoice(){wakeUntil=0;return ns.voice.start(receiveVoice,error=>status(error.message,true),text=>{if(text)$('voice-transcript').textContent='Escuchando: '+text;});}
+  function startVoice(){voiceGate.reset();return ns.voice.start(receiveVoice,error=>status(error.message,true),text=>{if(text)$('voice-transcript').textContent='Escuchando: '+text;});}
+  ['wake-word','voice-conversation'].forEach(id=>$(id).addEventListener('change',()=>voiceGate.reset()));
   $('voice-toggle').addEventListener('click',()=>{if(ns.voice.state!=='idle')ns.voice.stop();else startVoice();});
   $('world').addEventListener('click',world); $('globe').addEventListener('world-request',world);
   $('zoom-in').addEventListener('click',()=>execute('acercar')); $('zoom-out').addEventListener('click',()=>execute('alejar'));
   renderCatalog();
   refreshSelections();
   function togglePlaces(places,value){if(value)selections.add(places);else selections.remove(places);refreshSelections();status('Selección actualizada.');}
-  ns.app = {execute,world,setSidebar,receiveVoice,selections,get globe(){return globe;},startVoice,visit,selectPlaces,togglePlaces};
+  ns.app = {execute,world,setSidebar,receiveVoice,selections,get globe(){return globe;},startVoice,visit,selectPlaces,togglePlaces,refreshSelections};
   ns.history.init(ns.app);
+  ns.epochs.init(ns.app);
   ns.gestures=ns.initGestures(ns.app);
 })(window.GH = window.GH || {});

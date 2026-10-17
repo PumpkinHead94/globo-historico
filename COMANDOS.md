@@ -76,3 +76,14 @@ Rojo = corriente cálida; azul = fría; amarillo discontinuo = viento. Las flech
 Fuentes: Natural Earth, países 50m con 16 territorios adicionales de 10m; áreas marinas y ríos 50m. Dominio público: https://github.com/nvkelso/natural-earth-vector/tree/master/geojson . Tramos agrupados por nombre; traducciones propias de nombres comunes, otros nombres conservados. Áreas marinas sin significado jurisdiccional.
 
 Recorridos de circulación esquemáticos propios basados en el mapa NOAA https://www.vos.noaa.gov/docs/marine_info_guide.pdf y los cinturones NOAA/NWS https://www.weather.gov/media/ohx/PDF/Weather101GlobalCirculations.pdf . Alisios: https://oceanservice.noaa.gov/facts/tradewinds.html . No se redistribuyen las ilustraciones ni se consultan servicios al usar la aplicación.
+
+
+## Épocas y activación flexible · 0.7
+- Globo (también «lobo» reconocido) + comando; conversación de 20 segundos configurable en Capas del mapa.
+- Mostrar siglo quinto antes de Cristo: hacia 500 a. C.
+- Mostrar siglo cuarto antes de Cristo: hacia 323 a. C.
+- Mostrar siglo segundo después de Cristo: hacia 200 d. C.
+- Siguiente período / período anterior: recorrer los tres cortes disponibles.
+- Mostrar / ocultar territorios históricos, ciudades históricas, rutas históricas, recursos históricos o fronteras actuales.
+- Mapa actual: retirar la época histórica.
+- Época histórica: abrir el selector.
