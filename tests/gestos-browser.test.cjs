@@ -13,9 +13,16 @@ await page.locator('#gestures-toggle').click();await page.waitForFunction(()=>fr
 assert.equal(await page.evaluate(()=>{
  const g=GH.app.globe, start=g.target.lon, lat=g.target.lat, distance=g.target.distance;
  const hand=x=>{const p=Array.from({length:21},()=>({x:.5+x,y:.5}));p[0]={x:.5+x,y:.8};p[9]={x:.5+x,y:.6};for(const i of [8,12,16,20]){p[i-2]={x:.5+x,y:.45};p[i]={x:.5+x,y:.25};}p[4]={x:.7+x,y:.25};return p;};
- const frame=(x,time)=>gestureTestWorker.dispatchEvent(new MessageEvent('message',{data:{type:'result',landmarks:[hand(x)],aspect:1,time}}));
+ const frame=(x,time,y=0)=>gestureTestWorker.dispatchEvent(new MessageEvent('message',{data:{type:'result',landmarks:[hand(x).map(p=>({...p,y:p.y+y}))],aspect:1,time}}));
  frame(0,10000);frame(0,10250);frame(.02,10350);const right=g.target.lon>start;frame(-.02,10450);const left=g.target.lon<start;
- GH.gestures.release();g.world();return right&&left&&g.target.lat===lat&&g.target.distance===distance;
+ const lateralOnly=g.target.lat===lat;
+ frame(-.02,10550,-.02);const up=g.target.lat<lat;
+ frame(-.02,10650,.02);const down=g.target.lat>lat;
+ const before={...g.target};frame(0,10750,.04);const diagonal=g.target.lon>before.lon&&g.target.lat>before.lat;
+ g.target.lat=84;frame(0,10850,.08);const southLimit=g.target.lat===85;
+ g.target.lat=-84;frame(0,10950,.04);const northLimit=g.target.lat===-85;
+ const sameZoom=g.target.distance===distance;
+ GH.gestures.release();g.world();return right&&left&&lateralOnly&&up&&down&&diagonal&&southLimit&&northLimit&&sameZoom;
 }),true);
 
 await page.locator('#gesture-panel details').evaluate(e=>e.open=true);await page.screenshot({path:path.resolve(__dirname,'../../qa-globo/gestos.png')});

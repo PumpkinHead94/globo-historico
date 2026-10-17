@@ -1,4 +1,4 @@
-# Globo Histórico 0.6.2 · Giro y zoom por gestos
+# Globo Histórico 0.6.3 · Giro y zoom por gestos
 
 Aplicación educativa portable: globo 3D, geografía e historia con comandos de texto, mouse y reconocimiento de voz en español. Funciona localmente, sin suscripciones ni APIs pagas. Las bibliotecas, los datos y el modelo de voz vienen incluidos.
 
@@ -20,7 +20,7 @@ El código propio usa la [licencia MIT](LICENCIA.txt); los recursos de terceros 
 Abrí el acceso directo o **INICIAR-CON-VOZ.cmd**, pulsá **Activar gestos** y permití la cámara. Si tenías una versión anterior abierta, ejecutá primero **DETENER-SERVIDOR.cmd** y volvé a abrir: el servidor también se actualizó.
 
 - Mostrá una sola mano completa, con buena luz y la palma hacia la cámara.
-- **Mano abierta con los dedos extendidos:** mantenela un instante y movela a izquierda o derecha para girar el globo. El giro sigue la mano como se ve en la cámara en espejo, con límite de velocidad y filtro de temblores.
+- **Mano abierta con los dedos extendidos:** mantenela un instante y movela a izquierda, derecha, arriba o abajo para girar el globo. El giro sigue la mano como se ve en la cámara en espejo, con límite de velocidad y filtro de temblores.
 - **Después de usar el zoom:** cerrá y volvé a abrir la mano para regresar al giro. El giro y el zoom no se aplican simultáneamente.
 - Juntá pulgar e índice durante un instante, con los otros dedos extendidos, para tomar el zoom.
 - Separalos para agrandar el globo; acercalos para achicarlo.

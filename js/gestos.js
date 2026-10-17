@@ -3,7 +3,7 @@
   // Separación relativa a la palma: acercar la mano a la cámara no equivale a zoom.
   class GestureZoom {
     constructor(){this.reset();}
-    reset(){this.active=false;this.since=null;this.previous=null;this.center=null;this.lastTime=null;this.requested=false;this.rotateSince=null;this.rotateX=null;}
+    reset(){this.active=false;this.since=null;this.previous=null;this.center=null;this.lastTime=null;this.requested=false;this.rotateSince=null;this.rotateX=null;this.rotateY=null;}
     take(){this.reset();this.requested=true;}
     update(hands, aspect, time) {
       if(hands.length!==1){this.reset();return {message:hands.length?'Mostrá una sola mano.':'Buscando una mano…',delta:0};}
@@ -24,21 +24,23 @@
           if(this.since===null)this.since=time;
           if(time-this.since>=150){this.active=true;this.previous=aperture;}
         }else this.since=null;
-        if(this.active){this.rotateSince=null;this.rotateX=null;return {message:'Zoom tomado · separá los dedos.',delta:0};}
+        if(this.active){this.rotateSince=null;this.rotateX=null;this.rotateY=null;return {message:'Zoom tomado · separá los dedos.',delta:0};}
         const open=aperture>0.65&&[8,12,16,20].every(i=>dist(0,i)>dist(0,i-2)*1.15);
         if(open){
-          if(this.rotateSince===null){this.rotateSince=time;this.rotateX=p[9].x;}
+          if(this.rotateSince===null){this.rotateSince=time;this.rotateX=p[9].x;this.rotateY=p[9].y;}
           if(time-this.rotateSince>=200){
-            const dx=p[9].x-this.rotateX;
+            const dx=p[9].x-this.rotateX, dy=p[9].y-this.rotateY;
             // Cámara en espejo: sigue el desplazamiento visible, igual que arrastrar con mouse.
             const rotation=Math.abs(dx)>0.006?Math.max(-6,Math.min(6,dx*180)):0;
+            const rotationY=Math.abs(dy)>0.006?Math.max(-6,Math.min(6,dy*180)):0;
             if(rotation)this.rotateX=p[9].x;
-            return {message:'Giro lateral · mové la mano abierta. Pinza para zoom.',delta:0,rotation};
+            if(rotationY)this.rotateY=p[9].y;
+            return {message:'Giro libre · mové la mano arriba, abajo o a los lados.',delta:0,rotation,rotationY};
           }
-          this.rotateX=p[9].x;
+          this.rotateX=p[9].x;this.rotateY=p[9].y;
           return {message:'Mano abierta · mantenela un instante para girar.',delta:0};
         }
-        this.rotateSince=null;this.rotateX=null;
+        this.rotateSince=null;this.rotateX=null;this.rotateY=null;
         return {message:'Abrí la mano para girar o juntá pulgar e índice para zoom.',delta:0};
       }
       const change=aperture-this.previous;
@@ -86,7 +88,7 @@
             draw(data.landmarks);$('gesture-take').disabled=data.landmarks.length!==1;
             clearTimeout(timer);busy=false;const result=control.update(data.landmarks,data.aspect,data.time);tell(result.message);
             if(result.delta)app.globe?.zoomGesture(result.delta);
-            if(result.rotation)app.globe?.rotate(result.rotation,0);
+            if(result.rotation||result.rotationY)app.globe?.rotate(result.rotation||0,result.rotationY||0);
           }
         };
         worker.postMessage({type:'init'});
