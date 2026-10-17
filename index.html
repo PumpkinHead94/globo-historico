@@ -42,7 +42,7 @@
   </header>
   <main class="layout">
     <aside class="sidebar" id="sidebar" hidden>
-      <div class="eyebrow">EXPLORADOR / VERSIÓN 0.6.1</div>
+      <div class="eyebrow">EXPLORADOR / VERSIÓN 0.6.2</div>
       <h1>El mundo, <br>a tu alcance.</h1>
       <p class="intro">Elegí un destino. Conectá lugares. <br>Empezá a descubrir su historia.</p>
       <section class="selection" aria-labelledby="selection-heading">
@@ -95,11 +95,11 @@
       </div></details>
       <div id="globe" tabindex="0" role="region" aria-label="Globo 3D. Arrastrá para girar o usá las flechas del teclado."></div>
       <section id="gesture-panel" class="gesture-panel" aria-label="Control por gestos" hidden>
-        <div class="gesture-heading"><b>Zoom con la mano</b><button id="gesture-stop" type="button" aria-label="Apagar cámara y gestos">Apagar</button></div>
+        <div class="gesture-heading"><b>Giro y zoom con la mano</b><button id="gesture-stop" type="button" aria-label="Apagar cámara y gestos">Apagar</button></div>
         <p id="gesture-state" role="status" aria-live="polite">Cámara apagada.</p>
         <button id="gesture-take" type="button" disabled>Tomar zoom sin pinza</button>
         <details><summary>Guía y vista de cámara</summary>
-          <p>Mostrá una sola mano. Juntá pulgar e índice un instante para tomar el zoom, con los otros dedos extendidos. Separalos para agrandar y acercalos para achicar. Cerrá toda la mano o sacala de cámara para soltar.</p>
+          <p>Mostrá una sola mano abierta, con los dedos extendidos: movela a izquierda o derecha para girar el globo. Juntá pulgar e índice un instante para tomar el zoom, con los otros dedos extendidos. Separalos para agrandar y acercalos para achicar. Cerrá toda la mano o sacala de cámara para soltar. Después del zoom, cerrá y volvé a abrir la mano para regresar al giro.</p>
           <div class="gesture-preview"><canvas id="gesture-overlay" width="640" height="480" aria-hidden="true"></canvas><video id="gesture-video" autoplay muted playsinline aria-label="Vista local de la cámara"></video></div><p>Los puntos verdes indican una mano detectada. Si la pinza no toma el control, pulsá «Tomar zoom sin pinza» y después separá o acercá pulgar e índice.</p>
           <p>Buena luz y mano completa frente a la cámara. Procesamiento local: no se graba ni se envía video. Escape o cambiar de pestaña apaga la cámara.</p>
         </details>

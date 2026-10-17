@@ -7,3 +7,14 @@ g.update([hand()],1,800);g.update([hand()],1,1100);g.update([hand(),hand()],1,12
 console.log('PASS: pinza sostenida, zoom en ambos sentidos, puño, pérdida, dos manos, pausa, escala independiente y zona muerta.');
 
 g=new G();g.update([hand(.4)],1,0);g.update([hand(.4)],1,700);assert.equal(g.active,true);assert.ok(g.update([hand(.7)],1,1400).delta>0);g=new G();g.take();assert.equal(g.update([hand(.8)],1,0).delta,0);assert.equal(g.active,true);assert.ok(g.update([hand(.5)],1,700).delta<0);console.log("PASS: pinza tolerante, detector lento y toma manual sin salto.");
+
+function shifted(x,aperture=1){return hand(aperture).map(p=>({...p,x:p.x+x}));}
+g=new G();assert.equal(g.update([shifted(0)],1,0).rotation,undefined);assert.equal(g.update([shifted(0)],1,250).rotation,0);
+assert.ok(g.update([shifted(.02)],1,350).rotation>0);assert.ok(g.update([shifted(0)],1,450).rotation<0);assert.equal(g.update([shifted(.002)],1,550).rotation,0);
+assert.equal(g.update([shifted(.1)],1,650).rotation,6);assert.equal(g.update([shifted(.1)],1,750).rotation,0);
+g.update([hand(.1,true)],1,850);assert.equal(g.update([shifted(0)],1,950).rotation,undefined);g.update([shifted(0)],1,1200);
+g.update([hand(.1)],1,1300);g.update([hand(.1)],1,1500);assert.equal(g.active,true);const zoomOnly=g.update([shifted(.03,.7)],1,1600);assert.ok(zoomOnly.delta>0);assert.equal(zoomOnly.rotation,undefined);
+g.update([],1,1700);assert.equal(g.active,false);assert.equal(g.update([shifted(.1)],1,1800).rotation,undefined);
+g.update([shifted(.1)],1,2100);g.update([hand(),hand()],1,2200);assert.equal(g.update([shifted(0)],1,2300).rotation,undefined);
+g=new G();g.update([shifted(0)],1,0);g.update([shifted(0)],1,250);assert.equal(g.update([shifted(.2)],1,2500).rotation,undefined);
+console.log('PASS: giro bidireccional, inicio sin salto, temblores, límite, mano quieta, puño, exclusión de zoom, pérdida, dos manos y pausa.');

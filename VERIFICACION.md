@@ -73,3 +73,7 @@ Seis grupos de pruebas del intérprete aprobados; catálogo con 1.694 identifica
 - Prueba unitaria: pinza sostenida, separar/acercar, puño, pérdida de mano, dos manos, pausas, invariancia ante escala y zona muerta.
 - Edge automatizado con cámara sintética y modelo real local: carga de WASM/modelo y procesamiento de fotogramas; conexiones externas bloqueadas; sin solicitudes de cámara al abrir ni captura de audio; Escape, parada, reinicio, permiso denegado y cancelación mientras el permiso está pendiente.
 - Presentación comprobada en 1440×1000 y 390×844. No se grabó ni abrió la cámara física del usuario. La precisión y comodidad con manos reales quedan pendientes de prueba manual.
+
+
+## 0.6.2 · Giro lateral
+Pruebas de puntos de mano simulados: giro en ambos sentidos, toma sin salto, zona muerta, límite de desplazamiento, mano quieta, puño, pérdida de seguimiento, dos manos y exclusión del zoom. Prueba de navegador: resultados simulados enviados por el canal del detector modifican la longitud de la cámara sin cambiar latitud ni zoom; carga del modelo real con video sintético y pruebas de privacidad/ciclo de vida siguen pasando. Pendiente comprobar comodidad del giro con la mano real del usuario.

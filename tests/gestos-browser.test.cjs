@@ -6,10 +6,18 @@ const server=http.createServer((req,res)=>{const name=path.join(root,decodeURICo
 const page=await b.newPage({viewport:{width:1440,height:1000}}),errors=[],remote=[];
 await page.route('**/*',route=>{if(!route.request().url().startsWith(url)){remote.push(route.request().url());return route.abort();}return route.continue();});
 page.on('pageerror',e=>errors.push(e.message));
-await page.addInitScript(()=>{window.cameraCalls=0;window.framesSeen=0;const get=navigator.mediaDevices.getUserMedia.bind(navigator.mediaDevices);navigator.mediaDevices.getUserMedia=async c=>{cameraCalls++;window.testStream=await get(c);return testStream;};const W=window.Worker;window.Worker=class extends W{constructor(...a){super(...a);this.addEventListener('message',e=>{if(e.data.type==='result')framesSeen++;});}};});
+await page.addInitScript(()=>{window.cameraCalls=0;window.framesSeen=0;const get=navigator.mediaDevices.getUserMedia.bind(navigator.mediaDevices);navigator.mediaDevices.getUserMedia=async c=>{cameraCalls++;window.testStream=await get(c);return testStream;};const W=window.Worker;window.Worker=class extends W{constructor(...a){super(...a);window.gestureTestWorker=this;this.addEventListener('message',e=>{if(e.data.type==='result')framesSeen++;});}};});
 await page.goto(url);await page.waitForFunction(()=>window.GH?.gestures);assert.equal(await page.evaluate(()=>cameraCalls),0);
 assert.equal(await page.evaluate(()=>{const g=GH.app.globe;const initial=g.target.distance;g.zoomGesture(.1);const closer=g.target.distance<initial;g.zoomGesture(-.1);const back=Math.abs(g.target.distance-initial)<1e-9;g.zoomGesture(100);const near=g.target.distance===1.3;g.zoomGesture(-100);const far=g.target.distance===5;g.zoomGesture(NaN);const finite=Number.isFinite(g.target.distance);g.world();return closer&&back&&near&&far&&finite;}),true);
 await page.locator('#gestures-toggle').click();await page.waitForFunction(()=>framesSeen>=2,{},{timeout:60000});assert.match(await page.locator('#gesture-state').textContent(),/Buscando/);assert.equal(await page.evaluate(()=>testStream.getAudioTracks().length),0);
+assert.equal(await page.evaluate(()=>{
+ const g=GH.app.globe, start=g.target.lon, lat=g.target.lat, distance=g.target.distance;
+ const hand=x=>{const p=Array.from({length:21},()=>({x:.5+x,y:.5}));p[0]={x:.5+x,y:.8};p[9]={x:.5+x,y:.6};for(const i of [8,12,16,20]){p[i-2]={x:.5+x,y:.45};p[i]={x:.5+x,y:.25};}p[4]={x:.7+x,y:.25};return p;};
+ const frame=(x,time)=>gestureTestWorker.dispatchEvent(new MessageEvent('message',{data:{type:'result',landmarks:[hand(x)],aspect:1,time}}));
+ frame(0,10000);frame(0,10250);frame(.02,10350);const right=g.target.lon>start;frame(-.02,10450);const left=g.target.lon<start;
+ GH.gestures.release();g.world();return right&&left&&g.target.lat===lat&&g.target.distance===distance;
+}),true);
+
 await page.locator('#gesture-panel details').evaluate(e=>e.open=true);await page.screenshot({path:path.resolve(__dirname,'../../qa-globo/gestos.png')});
 await page.keyboard.press('Escape');assert.equal(await page.evaluate(()=>testStream.getTracks().every(t=>t.readyState==='ended')),true);assert.equal(await page.locator('#gestures-toggle').getAttribute('aria-pressed'),'false');
 await page.locator('#gestures-toggle').click();await page.waitForFunction(()=>framesSeen>=4,{},{timeout:60000});await page.locator('#gesture-stop').click();assert.equal(await page.evaluate(()=>testStream.getTracks().every(t=>t.readyState==='ended')),true);
