@@ -19,3 +19,8 @@
 .epoch-panel{position:absolute;z-index:7;top:48px;right:20px;width:min(310px,calc(100% - 40px));background:#101c29f5;border:1px solid #47616e;border-radius:8px;padding:10px;font-size:12px;max-height:68%;overflow:auto;line-height:1.5}.epoch-panel>summary{cursor:pointer;color:#d9efa9}.epoch-panel label{display:block;margin:8px 0}.epoch-panel select{width:100%;background:#152b38;color:#edf2ef;padding:7px;border:1px solid #47616e}.epoch-panel details{margin-top:10px}.epoch-panel a{display:block;color:#b6def5;margin:8px 0}.epoch-panel i{display:inline-block;width:12px;height:12px;margin:0 7px}.epoch-panel #epoch-date{color:#d9efa9;font-weight:600}.epoch-panel[open]~.gesture-panel{top:100px}#epoch-note{color:#b8c9d0}
 
 @media(max-width:600px){.epoch-panel{top:92px;right:12px;max-height:60%;width:calc(100% - 24px)}}
+
+/* Los paneles derechos comparten flujo: su altura nunca desplaza otro por encima. */
+.map-tools{position:absolute;z-index:8;top:48px;right:20px;max-height:calc(100% - 208px);width:min(310px,calc(100% - 40px));display:flex;flex-direction:column;gap:10px;overflow:auto;pointer-events:auto;scrollbar-width:thin;}
+.map-tools>.epoch-panel,.map-tools>.gesture-panel,.map-tools>.terrain-card{position:static;inset:auto;flex:none;width:100%;max-height:none;margin:0;overflow:visible;pointer-events:auto;box-sizing:border-box;}
+@media(max-width:700px){.map-tools{top:92px;right:12px;max-height:calc(100% - 247px);width:min(310px,calc(100% - 24px));}.map-tools>.epoch-panel,.map-tools>.gesture-panel,.map-tools>.terrain-card{width:100%;}}

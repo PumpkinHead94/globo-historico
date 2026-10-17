@@ -46,7 +46,7 @@
   </header>
   <main class="layout">
     <aside class="sidebar" id="sidebar" hidden>
-      <div class="eyebrow">EXPLORADOR / VERSIÓN 0.7</div>
+      <div class="eyebrow">EXPLORADOR / VERSIÓN 0.7.1</div>
       <h1>El mundo, <br>a tu alcance.</h1>
       <p class="intro">Elegí un destino. Conectá lugares. <br>Empezá a descubrir su historia.</p>
       <section class="selection" aria-labelledby="selection-heading">
@@ -98,6 +98,8 @@
         <label><input id="voice-conversation" type="checkbox" checked> Conversación: encadenar comandos durante 20 segundos</label><p>Se acepta «Globo» y la confusión «lobo» al inicio. Cada comando reconocido renueva 20 segundos para hablar sin repetir la activación. Desmarcá Conversación para pedir activación en cada orden.</p>
         <p>Con la voz encendida, decí «Globo, ir a Roma». Desmarcá esta opción para dar comandos sin palabra de activación.</p>
       </div></details>
+      <div id="globe" tabindex="0" role="region" aria-label="Globo 3D. Arrastrá para girar o usá las flechas del teclado."></div>
+      <div class="map-tools" aria-label="Herramientas del mapa">
       <details id="epoch-panel" class="epoch-panel"><summary>Época histórica<span id="epoch-summary-date"></span></summary>
         <label for="epoch-century">Siglo</label><select id="epoch-century"><option value="">Mapa sin época</option></select>
         <label for="epoch-moment">Momento representado</label><select id="epoch-moment"><option value="">Sin reconstrucción</option></select>
@@ -111,7 +113,6 @@
         <details><summary>Economía del período</summary><p id="epoch-economy"></p></details>
         <details><summary>Fuentes y alcance</summary><div id="epoch-sources"></div><p>Primera selección del Mediterráneo y Cercano Oriente. Límites aproximados; no son fronteras modernas ni ocupación uniforme. Costas, ríos y relieve de base actuales. Las zonas sin color no representan ausencia de pueblos. Las redes y recursos describen el período, no flujos medidos en el año indicado.</p><p>Cambiar de momento retira las selecciones históricas anteriores. Las selecciones geográficas manuales se conservan como referencias actuales y pueden superponerse. Las fichas de Historia abarcan períodos más amplios.</p></details>
       </details>
-      <div id="globe" tabindex="0" role="region" aria-label="Globo 3D. Arrastrá para girar o usá las flechas del teclado."></div>
       <section id="gesture-panel" class="gesture-panel" aria-label="Control por gestos" hidden>
         <div class="gesture-heading"><b>Giro y zoom con la mano</b><button id="gesture-stop" type="button" aria-label="Apagar cámara y gestos">Apagar</button></div>
         <p id="gesture-state" role="status" aria-live="polite">Cámara apagada.</p>
@@ -122,9 +123,10 @@
           <p>Buena luz y mano completa frente a la cámara. Procesamiento local: no se graba ni se envía video. Escape o cambiar de pestaña apaga la cámara.</p>
         </details>
       </section>
+      <details id="terrain-card" class="terrain-card" hidden><summary id="terrain-name"></summary><div class="eyebrow" id="terrain-kind"></div><p id="terrain-description"></p><small id="terrain-elevation"></small></details>
+      </div>
       <div id="fatal" class="fatal" hidden></div>
       <details id="legend" class="legend"><summary>Escala hipsométrica <span>m</span></summary><div id="legend-bands"></div><p>Altura respecto del nivel del mar. El sombreado modifica el brillo. Blanco indica altura, no nieve. Relieve regional generalizado; no muestra cumbres individuales.</p></details>
-      <details id="terrain-card" class="terrain-card" hidden><summary id="terrain-name"></summary><div class="eyebrow" id="terrain-kind"></div><p id="terrain-description"></p><small id="terrain-elevation"></small></details>
       <div class="map-note">RELIEVE SRTM15+ / GMT <span>RÍOS Y LAGOS · NATURAL EARTH</span></div>
       <details id="navigation-panel" class="navigation" aria-label="Controles de navegación"><summary>Vista</summary><div>
         <button id="zoom-out" aria-label="Alejar" title="Alejar">−</button>

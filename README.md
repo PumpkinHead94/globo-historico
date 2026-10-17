@@ -1,4 +1,6 @@
-# Globo Histórico 0.7 · Épocas históricas y voz fluida
+# Globo Histórico 0.7.1 · Épocas históricas y voz fluida
+
+Los paneles de época, gestos y territorio se acomodan uno debajo del otro. Si falta espacio, desplazá ese grupo para acceder a todos los controles.
 
 Aplicación educativa portable: globo 3D, geografía e historia con comandos de texto, mouse y reconocimiento de voz en español. Funciona localmente, sin suscripciones ni APIs pagas. Las bibliotecas, los datos y el modelo de voz vienen incluidos.
 
