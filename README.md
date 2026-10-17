@@ -1,4 +1,4 @@
-# Globo Histórico 0.6 · Zoom por gestos
+# Globo Histórico 0.6.1 · Zoom por gestos
 
 Aplicación educativa portable: globo 3D, geografía e historia con comandos de texto, mouse y reconocimiento de voz en español. Funciona localmente, sin suscripciones ni APIs pagas. Las bibliotecas, los datos y el modelo de voz vienen incluidos.
 
@@ -227,3 +227,7 @@ Por voz, anteponer «Globo»; por texto, escribir directamente.
 | Apagar micrófono | detener voz |
 
 Mundo conserva los colores; limpiar colores los borra.
+
+
+### Ajuste de gestos 0.6.1
+Pinza más tolerante y seguimiento compatible con intervalos de hasta 2 segundos entre detecciones. La vista de cámara abre al activar gestos y dibuja los puntos detectados. El botón «Tomar zoom sin pinza» se habilita al detectar una mano: toma la apertura actual como referencia, sin saltar de zoom. Sigue siendo necesario comprobar el funcionamiento con la cámara del usuario.
