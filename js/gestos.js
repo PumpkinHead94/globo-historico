@@ -63,6 +63,7 @@
       worker?.terminate();worker=null;stream?.getTracks().forEach(t=>t.stop());stream=null;
       video.pause();video.srcObject=null;control.reset();busy=false;draw([]);$('gesture-take').disabled=true;
       $('gesture-panel').querySelector('details').open=false;
+      $('gesture-panel').hidden=message==='Gestos desactivados · cámara apagada.'||message.startsWith('Gestos pausados');
       button.textContent='Activar gestos';button.setAttribute('aria-pressed','false');tell(message);
     }
     async function start(){

@@ -46,7 +46,7 @@
   </header>
   <main class="layout">
     <aside class="sidebar" id="sidebar" hidden>
-      <div class="eyebrow">EXPLORADOR / VERSIÓN 0.7.1</div>
+      <div class="eyebrow">EXPLORADOR / VERSIÓN 0.7.2</div>
       <h1>El mundo, <br>a tu alcance.</h1>
       <p class="intro">Elegí un destino. Conectá lugares. <br>Empezá a descubrir su historia.</p>
       <section class="selection" aria-labelledby="selection-heading">
@@ -101,6 +101,7 @@
       <div id="globe" tabindex="0" role="region" aria-label="Globo 3D. Arrastrá para girar o usá las flechas del teclado."></div>
       <div class="map-tools" aria-label="Herramientas del mapa">
       <details id="epoch-panel" class="epoch-panel"><summary>Época histórica<span id="epoch-summary-date"></span></summary>
+        <label for="map-view">Vista rápida</label><select id="map-view"><option value="geography">Geografía</option><option value="territories">Territorios históricos</option><option value="trade">Comercio</option><option value="resources">Recursos económicos</option><option value="custom" disabled>Personalizada</option></select><p id="view-note">Elegí una época para las vistas históricas. Podés combinar las casillas después.</p><label><input id="soft-relief" type="checkbox"> Suavizar relieve para leer las capas</label>
         <label for="epoch-century">Siglo</label><select id="epoch-century"><option value="">Mapa sin época</option></select>
         <label for="epoch-moment">Momento representado</label><select id="epoch-moment"><option value="">Sin reconstrucción</option></select>
         <p id="epoch-date" role="status">Época histórica desactivada</p><p id="epoch-note"></p>

@@ -29,7 +29,7 @@
     if(!open)$('sidebar-toggle').focus({preventScroll:true});
   }
   function territory(place){
-    $('terrain-card').hidden=false;$('terrain-name').textContent=place.name;
+    $('terrain-card').hidden=false;$('terrain-card').open=true;$('terrain-card').scrollIntoView({block:'nearest'});$('terrain-name').textContent=place.name;
     $('terrain-kind').textContent=place.kind?`${place.kind} · Lectura territorial`:'Destino · Entorno geográfico';
     let description=place.description;
     if(!place.kind){

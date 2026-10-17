@@ -40,6 +40,7 @@
       ctx.beginPath(); path(feature); if(!options.relief){ctx.fillStyle = '#93ad95'; ctx.fill();}
       ctx.strokeStyle = options.relief?'rgba(52,65,46,.45)':'#577c77'; ctx.lineWidth = .9; if(options.borders!==false)ctx.stroke();
     }
+    if(options.soft){ctx.fillStyle='rgba(38,59,62,.52)';ctx.fillRect(0,0,canvas.width,canvas.height);}
     if(options.water){
       ctx.beginPath();path(ns.lakes);ctx.fillStyle='#68b6d4';ctx.fill();
       ctx.beginPath();path(ns.rivers);ctx.strokeStyle='#308ebd';ctx.lineWidth=2.1;ctx.stroke();
@@ -108,7 +109,7 @@
       this.labels=this.labels.filter(l=>!l.selectedWater);
       for(const {place} of items.filter(i=>['river','lake','historical','trade'].includes(i.place.category))){
         if(this.labels.some(l=>l.place.id===place.id))continue;
-        const button=document.createElement('button');button.className='landform-label';button.textContent=place.shortName||place.name;button.setAttribute('aria-label','Explorar '+place.name);
+        const button=document.createElement('button');button.className='landform-label';button.textContent=(place.shortName||place.name).split(' · ')[0];button.setAttribute('aria-label','Explorar '+place.name);
         button.addEventListener('pointerdown',e=>e.stopPropagation());button.addEventListener('click',()=>this.element.dispatchEvent(new CustomEvent('place-request',{detail:place})));
         this.element.append(button);this.labels.unshift({button,place,position:position(place.lat,place.lon,1.004),selectedWater:true});
       }
@@ -133,11 +134,13 @@
     }
     drawLabels(){
       const direction=this.camera.position.clone().normalize();const occupied=[];
-      for(const label of this.labels){
+      const budget=this.distance>2.7?6:this.distance>1.9?12:24;
+      const ordered=this.labels.slice().sort((a,b)=>Number(!!b.selectedWater)-Number(!!a.selectedWater));
+      for(const label of ordered){
         const projected=label.position.clone().project(this.camera);
         const x=(projected.x+1)*this.width/2,y=(1-projected.y)*this.height/2;
         const enabled=label.place.selectionType==='flow'?(this.selectedItems||[]).some(i=>i.place.id===label.place.id):this.layers.labels;
-        const visible=enabled&&label.position.dot(direction)>1/this.distance+.04&&projected.z<1&&x>90&&x<this.width-90&&y>18&&y<this.height-18&&!occupied.some(p=>Math.abs(p.x-x)<125&&Math.abs(p.y-y)<26);
+        const visible=enabled&&occupied.length<budget&&label.position.dot(direction)>1/this.distance+.04&&projected.z<1&&x>90&&x<this.width-90&&y>18&&y<this.height-18&&!occupied.some(p=>Math.abs(p.x-x)<125&&Math.abs(p.y-y)<26);
         label.button.hidden=!visible;
         if(visible){label.button.style.left=x+'px';label.button.style.top=y+'px';occupied.push({x,y});}
       }
